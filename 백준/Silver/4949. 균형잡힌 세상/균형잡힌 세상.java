@@ -8,8 +8,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String input;
+
         while (!(input = br.readLine()).equals(".")) {
             Deque<Character> stack = new ArrayDeque<>();
+            boolean success = true;
             for (char c : input.toCharArray()) {
                 switch (c) {
                     case '(':
@@ -20,7 +22,7 @@ public class Main {
                         if (!stack.isEmpty() && stack.peek() == '(') {
                             stack.pop();
                         } else {
-                            stack.push(')');
+                           success = false;
                         }
                         break;
 
@@ -32,17 +34,18 @@ public class Main {
                         if (!stack.isEmpty() && stack.peek() == '[') {
                             stack.pop();
                         } else {
-                            stack.push(']');
+                            success = false;
                         }
                         break;
-
+                    default:
+                        break;
                 }
-
+                if(!success) break;
             }
-            if (stack.isEmpty()) {
-                System.out.println("yes");
-            } else {
+            if (!stack.isEmpty() || !success) {
                 System.out.println("no");
+            } else {
+                System.out.println("yes");
             }
         }
     }
