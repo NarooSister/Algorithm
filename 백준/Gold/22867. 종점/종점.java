@@ -17,7 +17,7 @@ public class Main {
             busTimes.add(new String[]{inTime, outTime});
         }
 
-        Collections.sort(busTimes, Comparator.comparing(a->a[0]));
+        busTimes.sort(Comparator.comparing(a -> a[0]));
 
         PriorityQueue<String> pq = new PriorityQueue<>();
 
