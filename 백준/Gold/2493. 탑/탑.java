@@ -32,8 +32,10 @@ public class Main {
             stack.push(i);
         }
         // 출력
-        for (int i : index) {
-            System.out.print(index[i]+" ");
+        StringBuilder sb = new StringBuilder();
+        for(int i : index){
+            sb.append(i).append(" ");
         }
+        System.out.println(sb);
     }
 }
