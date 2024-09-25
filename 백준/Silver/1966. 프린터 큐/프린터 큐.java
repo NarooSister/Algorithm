@@ -1,55 +1,55 @@
 import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.io.OutputStreamWriter;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
+//https://www.acmicpc.net/problem/1966
 public class Main {
-
-    // Deque에 문서의 인덱스와 중요도를 같이 저장한다.
-
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(br.readLine());
+        BufferedWriter bf = new BufferedWriter(new OutputStreamWriter(System.out));
+        Integer testCase = Integer.parseInt(br.readLine());
 
-        for (int i = 0; i < t; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int n = Integer.parseInt(st.nextToken());
-            int m = Integer.parseInt(st.nextToken());
 
-            Deque<int[]> deque = new ArrayDeque<>();
-            st = new StringTokenizer(br.readLine());
-
-            // 문서의 인덱스와 중요도 저장
+        for (int i = 0; i < testCase; i++) {
+            String[] str = br.readLine().split(" "); // 페이지 개수와 타겟
+            int n = Integer.parseInt(str[0]);
+            int target = Integer.parseInt(str[1]);
+            LinkedList<int[]> queue = new LinkedList<>();
+            String[] page = br.readLine().split(" ");
             for (int j = 0; j < n; j++) {
-                deque.offer(new int[]{j, Integer.parseInt(st.nextToken())});
+                int value = Integer.parseInt(page[j]);
+                queue.add(new int[]{j, value});
             }
-
-            int count = 0;  // 인쇄 순서
-
-            // 다 비울 때까지
-            while (!deque.isEmpty()){
-                int[] current = deque.poll();   // 첫번째 문서
-                boolean isPrinted = true;   // 인쇄 되었는지
-                
-                // 현재 큐의 가장 앞에 있는 문서의 중요도 확인하고
-                // 높은 문서가 하나라도 있다면 인쇄하지 않고 뒤에 재배치
-                for (int[] document : deque){
-                    if(document[1] > current[1]){
-                        deque.offer(current);
-                        isPrinted = false;
-                        break;
+            int count = 0;
+            while (!queue.isEmpty()) {
+                int[] cur = queue.poll(); // 현재 페이지보다 큰 값이 있는지 확인해야한다.
+                boolean isMax = true; //해당 요소가 가장 큰지 확인해야함.
+                for (int j = 0; j < queue.size(); j++) {
+                    int[] next = queue.get(j);
+                    if (cur[1] < next[1]) {
+                        queue.add(cur); // queue 요소중 더 큰 요소가 있다면 마지막으로
+                        for (int z = 0; z < j; z++) {
+                            //queue의 j번째에 cur(뽑은 요소)보다 큰 게 있는 것이므로
+                            // j까지만 반복한다.
+                            queue.offer(queue.poll());
+                        }
+                        isMax = false;
+                        break; // 한번 정렬을했다면 그대로 반복문을 종료한다.
                     }
                 }
-                
-                // 현재 문서가 인쇄된 경우
-                if(isPrinted){
-                    count++;    // 현재 문서 인쇄 count;
-                    if(current[0] == m){    // 궁금한 문서 m 일 경우 출력하고 종료
-                        System.out.println(count);
+                if (isMax) {
+                    count++;
+                    if (cur[0] == target) { // 만약 현재 인덱스가 타겟이면서 최대 값이라면 출력하는 것이기때문에 break 한다.
+                        bf.write(count + "\n");
                         break;
                     }
                 }
             }
         }
+        bf.flush();
     }
 }
