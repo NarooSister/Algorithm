@@ -1,21 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-/*
-1. 입력
-T
-...T줄동안
-정수 A, 정수 B
-
-2. 출력
-한 줄에 하나씩 답 출력
-
-3. 문제 접근법
-최소 공통 조상 구하기 (LCA)
-문제는 모든 노드가 채워진 포화이진트리이다.
-따라서 자식노드/2 하면 부모 노드를 구할 수 있다.
-
- */
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
