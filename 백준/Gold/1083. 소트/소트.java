@@ -35,12 +35,13 @@ public class Main {
         while(currentIndex < n-1 && s > 0){
             int max = currentIndex;
             // 현재 위치에서 교환 가능한 범위 내에서 최댓값 찾기
+            // 현재위치 + 1 부터 s인 범위(n보다는 작은)까지 돌린다.
             for (int i = currentIndex + 1; i < n && i <= currentIndex + s; i++) {
                 if(a[i] > a[max]){
                   max = i;
                 }
             }
-            // 두 수 교환
+            // 최댓값과 최댓값보다 이전의 수, 두 수 교환
             while(max > currentIndex) {
                 int tmp = a[max];
                 a[max] = a[max -1];
@@ -50,6 +51,7 @@ public class Main {
             }
             currentIndex++;
         }
+        
         StringBuilder sb = new StringBuilder();
         for (int i : a) {
             sb.append(i).append(" ");
