@@ -11,11 +11,12 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
+
         graph = new ArrayList<>();
         for (int i = 0; i < n+1; i++) {
             graph.add(new ArrayList<>());
         }
-        int max=0;
+        int max = 0;
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
@@ -32,30 +33,31 @@ public class Main {
         // 공장이 있는 섬으로 가는 길 중
         // 가장 큰 중량으로 이동할 수 있는 길을 찾는다.
 
+        // 이분탐색으로 중량 확인
         int low = 1;
         int high = max;
         int result = 0;
-        while(low<=high){
-            int mid = (low + high) /2;
+        while (low<=high){
+            int mid = (low+high)/2;
             if(bfs(fac[0], fac[1], mid)){
                 result = mid;
                 low = mid+1;
-            } else{
+            } else {
                 high = mid-1;
             }
         }
         System.out.println(result);
     }
-    // mid 중량으로 이동할 수 있는지 확인하는 bfs
+    // 통과할 수 있는 중량인지 확인
     static boolean bfs(int start, int end, int mid){
         Queue<Integer> queue = new ArrayDeque<>();
         visited = new boolean[graph.size()];
-        queue.add(start);
         visited[start] = true;
+        queue.add(start);
         while(!queue.isEmpty()){
             int current = queue.poll();
             if(current == end) return true;
-            for(int [] next : graph.get(current)){
+            for(int[] next : graph.get(current)){
                 int nextIsland = next[0];
                 int weight = next[1];
                 if(!visited[nextIsland] && weight>=mid){
