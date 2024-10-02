@@ -13,10 +13,14 @@ public class Main {
         int maxLength = -1; // 최대길이 접두사
         String a = "";
         String b = "";
-        // 출력 시 index값에 따라 나열해야 하므로 
+        // 출력 시 index값에 따라 나열해야 하므로
         // 이중 for문으로 다음 수와 비교한다.
         for (int i = 0; i < n - 1; i++) {
+            String now = strings[i];
+            if(now.length() <= maxLength) continue;
             for (int j = i+1; j < n; j++) {
+                String next = strings[j];
+                if(next.length() <= maxLength) continue;
                 int length = commonLength(strings[i], strings[j]);
                 if(length > maxLength){
                     maxLength = length;
