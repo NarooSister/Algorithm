@@ -1,9 +1,4 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 
 /*
@@ -25,14 +20,17 @@ public class Main {
         StringBuilder sb = new StringBuilder();
         String str = sc.nextLine();
         char [] chars = str.toCharArray();
+        // 오름차순 정렬
         Arrays.sort(chars);
 
+        // 각 자리수를 모두 더한 수 구하기
         int tmp = 0;
         for (int i = 0; i < chars.length; i++) {
             tmp += chars[i];
         }
+        // 0이 포함되어있으면서 모든 수를 더한 값을 3으로 나누면 0이 되는지 확인
         if(chars[0] == '0' && tmp%3 ==0){
-            sb.append(chars).reverse();
+            sb.append(chars).reverse(); // 뒤집어서 저장
         }else{
             sb.append("-1");
         }
