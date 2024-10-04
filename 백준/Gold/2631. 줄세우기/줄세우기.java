@@ -24,7 +24,9 @@ public class Main {
         for (int i = 0; i < n; i++) {
             child[i] = Integer.parseInt(br.readLine());
         }
+        
         dp[0] = 1;
+        int max = 1;
         for (int i = 0; i < n; i++) {
             dp[i] = 1;  // 다시 구하기 위해 초기화 해준다.
             for (int j = 0; j < i; j++) {   // 자기 앞까지의 숫자들을 모두 비교해서 자신을 구한다.
@@ -32,11 +34,9 @@ public class Main {
                     dp[i] = Math.max(dp[i], dp[j]+1);
                 }
             }
-        }
-        int max = Integer.MIN_VALUE;
-        for (int i = 0; i < n; i++) {
             max = Math.max(max, dp[i]);
         }
+     
         System.out.println(n-max);
     }
 }
