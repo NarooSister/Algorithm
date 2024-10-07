@@ -20,14 +20,13 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
-		int n = -1;
+		int n;
 		int testCase = 0;
-		while(n != 0) {
-			n =Integer.parseInt(br.readLine());
-			if(n == 0) break;
+		while((n =Integer.parseInt(br.readLine())) != 0) {
 			testCase++;
 			int [][] cave = new int [n][n];
 			int [][] dist = new int [n][n];	// 최소비용 저장 배열
+			
 			for(int i = 0; i < n; i++) {
 				st = new StringTokenizer(br.readLine());
 				for(int j = 0; j < n; j++) {
