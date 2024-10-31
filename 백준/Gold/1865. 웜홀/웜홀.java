@@ -42,33 +42,28 @@ public class Main {
 
 				}
 			}
-			
-			boolean isNegative = false;
-			for (int j = 1; j <= n; j++) {
-				if(bellmanFord(graph, n, j)){
-					System.out.println("YES");
-					isNegative = true;
-					break;
-				}
-			}
-			if(!isNegative){
+
+			if (bellmanFord(graph, n)) {
+				System.out.println("YES");
+			} else {
 				System.out.println("NO");
+
 			}
 		}
 	}
 
-	public static boolean bellmanFord(List<Edge> graph, int n, int start) {
+	public static boolean bellmanFord(List<Edge> graph, int n) {
 		int INF = 1000000000;
 		int[] dist = new int[n + 1];
 		boolean update = false;
 
 		Arrays.fill(dist, INF);
-		dist[start] = 0;
+		dist[1] = 0;
 
 		for (int i = 1; i < n; i++) {
 			update = false;
 			for (Edge edge : graph) {
-				if (dist[edge.u] != INF && dist[edge.u] + edge.weight < dist[edge.v]) {
+				if (dist[edge.u] + edge.weight < dist[edge.v]) {
 					dist[edge.v] = dist[edge.u] + edge.weight;
 					update = true;
 				}
@@ -80,7 +75,7 @@ public class Main {
 		}
 
 		for (Edge edge : graph) {
-			if (dist[edge.u] != INF && dist[edge.u] + edge.weight < dist[edge.v]) {
+			if (dist[edge.u] + edge.weight < dist[edge.v]) {
 				return true;
 			}
 		}
