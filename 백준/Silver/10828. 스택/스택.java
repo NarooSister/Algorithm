@@ -18,23 +18,18 @@ public class Main {
                 case "push":
                     push(Integer.parseInt(command[1]));
                     break;
-
                 case "pop":
                     sb.append(pop()).append("\n");
                     break;
-
                 case "size":
                     sb.append(size()).append("\n");
                     break;
-
                 case "empty":
                     sb.append(empty()).append("\n");
                     break;
-
                 case "top":
                     sb.append(top()).append("\n");
                     break;
-
             }
         }
         System.out.println(sb);
@@ -48,11 +43,7 @@ public class Main {
     }
 
     public static int pop() {
-        if (top == -1) {
-            return -1;
-        } else {
-            return arr[top--];
-        }
+        return top == -1 ? -1 : arr[top--];
     }
 
     public static int size() {
@@ -60,18 +51,10 @@ public class Main {
     }
 
     public static int empty() {
-        if (top == -1) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return top == -1 ? 1 : 0;
     }
 
     public static int top() {
-        if (top == -1) {
-            return -1;
-        } else {
-            return arr[top];
-        }
+        return top == -1 ? -1 : arr[top];
     }
 }
