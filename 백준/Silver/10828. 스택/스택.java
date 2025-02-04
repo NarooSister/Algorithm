@@ -8,29 +8,36 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
         arr = new int[n];
 
         for (int i = 0; i < n; i++) {
-            String[] order = br.readLine().split(" ");
-            switch (order[0]) {
+            String[] command = br.readLine().split(" ");
+            switch (command[0]) {
                 case "push":
-                    push(Integer.parseInt(order[1]));
+                    push(Integer.parseInt(command[1]));
                     break;
+
                 case "pop":
-                    System.out.println(pop());
+                    sb.append(pop()).append("\n");
                     break;
+
                 case "size":
-                    System.out.println(size());
+                    sb.append(size()).append("\n");
                     break;
+
                 case "empty":
-                    System.out.println(empty());
+                    sb.append(empty()).append("\n");
                     break;
+
                 case "top":
-                    System.out.println(top());
+                    sb.append(top()).append("\n");
                     break;
+
             }
         }
+        System.out.println(sb);
     }
 
     public static void push(int x) {
@@ -41,8 +48,11 @@ public class Main {
     }
 
     public static int pop() {
-        return top != -1 ? arr[top--] : -1;
-
+        if (top == -1) {
+            return -1;
+        } else {
+            return arr[top--];
+        }
     }
 
     public static int size() {
@@ -50,11 +60,18 @@ public class Main {
     }
 
     public static int empty() {
-       return top == -1 ? 1 : 0;
+        if (top == -1) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     public static int top() {
-        return top == -1 ? -1 : arr[top];
+        if (top == -1) {
+            return -1;
+        } else {
+            return arr[top];
+        }
     }
-
 }
